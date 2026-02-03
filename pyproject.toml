@@ -1,0 +1,10 @@
+[project]
+name = "track-iiserb"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "nodejs>=0.1.1",
+    "npm>=0.1.1",
+]
