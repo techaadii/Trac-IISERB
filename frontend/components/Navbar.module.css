@@ -1,0 +1,79 @@
+.navbar {
+  height: 60px;
+  background: linear-gradient(90deg, #020810 0%, #050f1a 100%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.brandIcon {
+  width: 36px;
+  height: 36px;
+  background: var(--cyan-glow);
+  border: 1px solid var(--cyan);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px var(--cyan-glow), inset 0 0 8px var(--cyan-glow2);
+  flex-shrink: 0;
+}
+
+.brandTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-bright);
+  line-height: 1.2;
+}
+
+.dot {
+  color: var(--cyan);
+}
+
+.brandSub {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+
+.navBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--cyan-dim);
+  background: var(--cyan-glow2);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+}
+
+.navDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: pulse 2s infinite;
+}
