@@ -1,0 +1,381 @@
+.liveView {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Header ────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-bright);
+}
+
+.liveIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--danger);
+  box-shadow: 0 0 8px var(--danger);
+  animation: pulse 1.5s infinite;
+  flex-shrink: 0;
+}
+
+.headerSub {
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+.headerStats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.statChip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+}
+
+.chipDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chipVal {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.chipLabel {
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.refreshBtn {
+  font-size: 0.78rem !important;
+  padding: 0.45rem 0.9rem !important;
+}
+
+/* ── Online progress bar ───────────────────────────────────────── */
+.onlineBar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.onlineFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--success));
+  box-shadow: 0 0 8px var(--cyan-glow);
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+/* ── Grid ──────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+/* ── Expanded layout ───────────────────────────────────────────── */
+.expandedWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.thumbStrip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+/* ── Camera tile ───────────────────────────────────────────────── */
+.tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+}
+
+.tile:hover {
+  transform: translateY(-2px);
+}
+
+.tile.online {
+  border-color: rgba(0, 229, 255, 0.2);
+}
+
+.tile.online:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px var(--cyan-glow);
+}
+
+.tile.offline {
+  border-color: var(--border);
+  opacity: 0.7;
+}
+
+.tile.offline:hover {
+  border-color: rgba(255, 68, 102, 0.4);
+  box-shadow: 0 0 12px rgba(255, 68, 102, 0.1);
+  opacity: 1;
+}
+
+.tile.expanded {
+  cursor: zoom-out;
+  border-color: var(--cyan);
+  box-shadow: 0 0 24px var(--cyan-glow);
+}
+
+/* ── Tile Header ────────────────────────────────────────────────── */
+.tileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.tileId {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+}
+
+.statusPill {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 10px;
+}
+
+.pillOnline {
+  background: rgba(0, 255, 157, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(0, 255, 157, 0.25);
+}
+
+.pillOffline {
+  background: rgba(255, 68, 102, 0.1);
+  color: var(--danger);
+  border: 1px solid rgba(255, 68, 102, 0.25);
+}
+
+.statusLed {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s infinite;
+}
+
+/* ── Feed area ──────────────────────────────────────────────────── */
+.feedArea {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #020810;
+  overflow: hidden;
+  flex: 1;
+  min-height: 120px;
+}
+
+.tile.expanded .feedArea {
+  aspect-ratio: 16 / 9;
+  min-height: 400px;
+}
+
+.feedImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Scan-line CRT effect */
+.scanLines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Corner bracket decorations */
+.corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  z-index: 3;
+  opacity: 0.6;
+}
+
+.tl { top: 6px;    left: 6px;    border-top: 1px solid var(--cyan);  border-left: 1px solid var(--cyan); }
+.tr { top: 6px;    right: 6px;   border-top: 1px solid var(--cyan);  border-right: 1px solid var(--cyan); }
+.bl { bottom: 6px; left: 6px;    border-bottom: 1px solid var(--cyan); border-left: 1px solid var(--cyan); }
+.br { bottom: 6px; right: 6px;   border-bottom: 1px solid var(--cyan); border-right: 1px solid var(--cyan); }
+
+.tile.offline .tl,
+.tile.offline .tr,
+.tile.offline .bl,
+.tile.offline .br {
+  border-color: var(--danger);
+  opacity: 0.3;
+}
+
+/* Loading dots */
+.feedPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  height: 100%;
+}
+
+.loadingDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  opacity: 0.7;
+  animation: dotPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.4; }
+  40%           { transform: scale(1.2); opacity: 1;   }
+}
+
+/* Offline placeholder */
+.offlinePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 0.4rem;
+}
+
+.offlineIcon {
+  font-size: 1.8rem;
+  color: var(--danger);
+  opacity: 0.3;
+}
+
+.offlineText {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--danger);
+  opacity: 0.5;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Tile footer ───────────────────────────────────────────────── */
+.tileFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.75rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+  gap: 0.5rem;
+}
+
+.tileLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tileMeta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Loading state ─────────────────────────────────────────────── */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4rem;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.loadingRing {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

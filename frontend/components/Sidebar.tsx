@@ -1,17 +1,42 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Sidebar.module.css'
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'
 
 const navItems = [
   { label: 'Dashboard',      icon: '⬡' },
   { label: 'Camera Network', icon: '◉' },
   { label: 'Vehicle Search', icon: '⊕' },
+  { label: 'Live Cameras',   icon: '▶' },
   { label: 'Timelines',      icon: '≡' },
 ]
 
-export default function Sidebar() {
-  const [active, setActive] = useState('Vehicle Search')
+type Props = {
+  active?: string
+  onChange?: (label: string) => void
+}
+
+export default function Sidebar({ active = 'Vehicle Search', onChange }: Props) {
+  const [onlineCount,  setOnlineCount]  = useState<number | null>(null)
+  const [offlineCount, setOfflineCount] = useState<number | null>(null)
+
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        const res  = await fetch(`${API_BASE}/api/live/status`)
+        const data = await res.json()
+        setOnlineCount(data.online_count)
+        setOfflineCount(data.offline_count)
+      } catch {
+        // backend not yet running — show placeholder
+      }
+    }
+    fetchStatus()
+    const t = setInterval(fetchStatus, 15_000)
+    return () => clearInterval(t)
+  }, [])
 
   return (
     <aside className={styles.sidebar}>
@@ -21,10 +46,13 @@ export default function Sidebar() {
         <div
           key={item.label}
           className={`${styles.navItem} ${active === item.label ? styles.active : ''}`}
-          onClick={() => setActive(item.label)}
+          onClick={() => onChange?.(item.label)}
         >
           <span className={styles.icon}>{item.icon}</span>
-          {item.label}
+          <span>{item.label}</span>
+          {item.label === 'Live Cameras' && onlineCount !== null && (
+            <span className={styles.liveBadge}>{onlineCount} live</span>
+          )}
         </div>
       ))}
 
@@ -34,11 +62,15 @@ export default function Sidebar() {
 
       <div className={styles.statusItem}>
         <span className={`${styles.statusDot} ${styles.green}`} />
-        <span>9 Cameras Active</span>
+        <span>
+          {onlineCount !== null ? `${onlineCount} Camera${onlineCount !== 1 ? 's' : ''} Online` : '— Cameras Online'}
+        </span>
       </div>
       <div className={styles.statusItem}>
         <span className={`${styles.statusDot} ${styles.yellow}`} />
-        <span>2 Alerts</span>
+        <span>
+          {offlineCount !== null ? `${offlineCount} Camera${offlineCount !== 1 ? 's' : ''} Offline` : '— Cameras Offline'}
+        </span>
       </div>
     </aside>
   )
