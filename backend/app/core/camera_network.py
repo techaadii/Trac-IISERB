@@ -47,7 +47,7 @@ EDGES:list[Tuple[str,str]]=[
     ("AB4",           "ENTRY_CAM"),
     ("AB4",           "MAIN_BUILDING"),
     ("MAIN_BUILDING", "AB4"),
-    ("AB4",           "HOSTEl_AB3"),
+    ("AB4",           "HOSTEL_AB3"),
     ("AB4",           "AB3_GATE"),
     ("AB4",           "LHC_SC"),
     ("AB4",           "EXIT_CAM"),
